@@ -9,7 +9,7 @@ export const ContactCard = ({ name, number, onDelete, id }) => {
             <FcPhoneAndroid/>
                 <ContactCardValue>{name} : {number}</ContactCardValue>
                 </ContactValuedWrappper>
-            <ContactCardDelButton onClick={()=>onDelete(id) }>Delete</ContactCardDelButton>
+            <ContactCardDelButton onClick={() => onDelete(id) }>Delete</ContactCardDelButton>
         </ContactCardWrappper>
         
     </>)
