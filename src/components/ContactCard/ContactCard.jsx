@@ -3,8 +3,9 @@ import { ContactCardWrappper, ContactCardValue, ContactCardDelButton,ContactValu
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contactsSlice';
 
-export const ContactCard = ({ name, number, id }) => {
+export const ContactCard = ({ name, number, id}) => {
     const dispatch = useDispatch();
+    
     
     const onDelete = () => {
         dispatch(deleteContact(id));

@@ -1,16 +1,14 @@
 import { ContactCard } from "components/ContactCard/ContactCard";
 import { ContactCardItem } from "./ContactList.styled";
-import { getContacts } from "redux/contactsSlice";
-import { getFilter } from "redux/filterSlice";
 import { useSelector } from "react-redux";
 
 
 export const ContactList = () => { 
-    const contacts = useSelector(getContacts);
-    const filter = useSelector(getFilter);
+    const contacts = useSelector(state => state.contacts)||[];
+    const filter = useSelector(state => state.filter.filter)||'';
     
     const visibleContacts = () => {
-    return contacts.filter(({ name }) =>
+        return contacts.filter(({ name }) =>
       name
         .split(' ')
         .join('')

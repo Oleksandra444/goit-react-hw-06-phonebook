@@ -4,7 +4,8 @@ import { changeFilter, resetFilter } from "redux/filterSlice";
 
 export const ContactFilter = () => {
 const dispatch = useDispatch();
-  const value = useSelector(state => state.filter);
+const value = useSelector(state => state.filter.filter);
+  
   const onChange = e => {
     const filter = e.currentTarget.value;
     dispatch(changeFilter(filter));
@@ -20,6 +21,7 @@ const dispatch = useDispatch();
     <ContactFilterWrapper>
       <ContactFilterInput
         type="text"
+        
         value={value}
         onChange={onChange}
         placeholder="SEARCH"

@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Field, FormGroup, ErrorMessage, ContactAddButton } from "./ContactForm.styled"
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, getContacts } from 'redux/contactsSlice';
+import { addContact } from 'redux/contactsSlice';
 
 const contactScheme = Yup.object().shape({
   name: Yup.string()
@@ -16,7 +16,7 @@ const contactScheme = Yup.object().shape({
 
 export const ContactForm = () => { 
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(state => state.contacts);
 
   const initialValues = {
     name: '',
@@ -24,7 +24,8 @@ export const ContactForm = () => {
   };
 
  
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = values => {
+    
     const duplicate = contacts.some(
       ({ name }) => name.toLowerCase() === values.name.toLowerCase()
     );
@@ -32,7 +33,7 @@ export const ContactForm = () => {
       return alert(`${values.name} is already in contacts`);
     }
     dispatch(addContact(values));
-    resetForm();
+   
   };
   
    
@@ -44,7 +45,10 @@ export const ContactForm = () => {
       <Formik
         
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+        onSubmit={(values, actions) => {
+          handleSubmit(values);
+          actions.resetForm();
+        }}
          
      validationSchema={contactScheme}
  
